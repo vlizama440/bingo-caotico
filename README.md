@@ -1,29 +1,11 @@
-# Bingo — hasta 50 personas
+# Bingo 2.2 — corrección de acceso de jugadores
 
-Incluye: cartones individuales BINGO 5×5, sala de **3 dígitos**, un animador que sortea los números de uno en uno, tómbola animada durante **2 segundos** con botón **Parar** para mostrar el resultado antes, números marcados manualmente (incluso si todavía no han salido), cartón aleatorio y personalización de color/fichas antes de comenzar y comprobación de línea o cartón **por jugador desde el panel del animador**.
+Esta versión corrige el error que impedía mostrar el cartón después de entrar a la sala. El servidor registraba al jugador, pero la vista de jugador intentaba acceder al historial completo de números (`state.drawn`), que por diseño solo se envía al animador. Ahora se usa `playerSummary()` y se evita el error.
 
-## Actualizar tu bingo ya publicado en GitHub y Render
+También se evita enviar dos solicitudes de entrada accidentalmente mientras se procesa la primera.
 
-1. Descomprime el ZIP y abre tu repositorio existente `bingo-caotico` en GitHub.
-2. Reemplaza los archivos de la raíz `server.js`, `index.html`, `package.json`, `README.md` y `render.yaml` por los de esta versión. **No subas la carpeta completa ni el ZIP cerrado.**
-3. En GitHub presiona **Commit changes**. Render debería desplegar automáticamente la nueva versión usando el mismo servicio Node configurado con `npm install` y `npm start`.
-4. Abre el enlace existente de Render. Si no se actualiza, en Render elige **Manual Deploy → Deploy latest commit**.
+## Actualización
 
-## Reglas y validación
+Sube `index.html` a la raíz de tu repositorio de GitHub y reemplaza el existente. Render publicará la actualización de forma automática. No es necesario reiniciar la partida ni volver a crear el servicio.
 
-- Todos tienen un cartón diferente y la casilla central es gratis.
-- Cada jugador puede poner/quitar una ficha en cualquier número mientras la partida esté en curso, incluso en un número que aún no fue sorteado.
-- **Solo son válidos los números que fueron sorteados y que el participante marcó**. El servidor verifica esto; marcar antes un número no lo vuelve válido hasta que salga.
-- El animador puede pulsar **Comprobar línea** o **Comprobar cartón** en cualquier jugador. Se muestra si corresponde el premio y los números que faltan por estar sorteados/marcados. Las líneas válidas son horizontales, verticales y diagonales.
-- El cartón y su apariencia se pueden modificar únicamente **antes** de comenzar. Después quedan bloqueados.
-- La primera persona que complete el cartón provoca el final de la partida. El animador puede reiniciar con **Nueva partida**.
-
-## Importante para el día del evento
-
-El servidor guarda las salas en memoria. En el plan gratuito de Render, si el servidor se reinicia o entra en reposo, la partida puede perderse. Conviene usar una instancia estable para sesiones importantes y hacer una prueba previa con varios celulares. Los jugadores pueden volver a conectarse con el mismo navegador si la sala continúa activa. No uses el mismo navegador para dos jugadores diferentes: la sesión local del navegador es única.
-
-## Cambios de esta versión
-- El juego se titula simplemente **Bingo** y la opción de marcador se llama **Ficha**.
-- Los jugadores solo ven el último número, nunca el historial de sorteos ni el contador de números salidos; el animador sí ve el historial.
-- Durante la tómbola el botón cambia a **Parar**, que revela inmediatamente el número ya elegido sin repetirlo. Si no se toca, se revela a los dos segundos.
-- El servidor ignora cambios de estilo tardíos una vez empezada la partida, sin mostrar mensajes molestos al marcar el cartón.
+Tras la publicación, los jugadores que ya habían entrado pueden **recargar la página en el mismo navegador y teléfono**; se recuperará su cartón usando la sesión guardada. Si su navegador borró los datos, deberá coordinarse con el animador para entrar con otro nombre o empezar una nueva sala.
