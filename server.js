@@ -9,7 +9,7 @@ const wss = new WebSocket.Server({ server, maxPayload: 4096 });
 const PORT = process.env.PORT || 3000;
 const MAX_PLAYERS = 40;
 app.disable('x-powered-by');
-app.use(express.static('public'));
+app.get('/', (_, res) => res.sendFile(require('path').join(__dirname, 'index.html')));
 app.get('/health', (_, res) => res.status(200).send('ok'));
 const sessions = new Map();
 const clients = new WeakMap();
