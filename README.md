@@ -1,6 +1,6 @@
-# Bingo Caótico 2.0 — hasta 50 personas
+# Bingo — hasta 50 personas
 
-Incluye: cartones individuales BINGO 5×5, sala de **3 dígitos**, un animador que sortea los números de uno en uno, tómbola animada durante **2 segundos**, números marcados manualmente (incluso si todavía no han salido), cartón aleatorio y personalización de color/fichas antes de comenzar y comprobación de línea o cartón **por jugador desde el panel del animador**.
+Incluye: cartones individuales BINGO 5×5, sala de **3 dígitos**, un animador que sortea los números de uno en uno, tómbola animada durante **2 segundos** con botón **Parar** para mostrar el resultado antes, números marcados manualmente (incluso si todavía no han salido), cartón aleatorio y personalización de color/fichas antes de comenzar y comprobación de línea o cartón **por jugador desde el panel del animador**.
 
 ## Actualizar tu bingo ya publicado en GitHub y Render
 
@@ -21,3 +21,9 @@ Incluye: cartones individuales BINGO 5×5, sala de **3 dígitos**, un animador q
 ## Importante para el día del evento
 
 El servidor guarda las salas en memoria. En el plan gratuito de Render, si el servidor se reinicia o entra en reposo, la partida puede perderse. Conviene usar una instancia estable para sesiones importantes y hacer una prueba previa con varios celulares. Los jugadores pueden volver a conectarse con el mismo navegador si la sala continúa activa. No uses el mismo navegador para dos jugadores diferentes: la sesión local del navegador es única.
+
+## Cambios de esta versión
+- El juego se titula simplemente **Bingo** y la opción de marcador se llama **Ficha**.
+- Los jugadores solo ven el último número, nunca el historial de sorteos ni el contador de números salidos; el animador sí ve el historial.
+- Durante la tómbola el botón cambia a **Parar**, que revela inmediatamente el número ya elegido sin repetirlo. Si no se toca, se revela a los dos segundos.
+- El servidor ignora cambios de estilo tardíos una vez empezada la partida, sin mostrar mensajes molestos al marcar el cartón.
