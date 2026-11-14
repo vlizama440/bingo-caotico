@@ -1,34 +1,23 @@
-# Bingo Caótico — listo para publicar desde el navegador
+# Bingo Caótico 2.0 — hasta 50 personas
 
-Bingo en vivo para un animador y hasta 40 jugadores. El animador pulsa «Sacar siguiente número» una vez por sorteo. Los participantes tocan sus números manualmente. Los cartones son distintos y el servidor valida líneas y bingo.
+Incluye: cartones individuales BINGO 5×5, sala de **3 dígitos**, un animador que sortea los números de uno en uno, tómbola animada durante **2 segundos**, números marcados manualmente (incluso si todavía no han salido), cartón aleatorio y personalización de color/fichas antes de comenzar y comprobación de línea o cartón **por jugador desde el panel del animador**.
 
-## Publicación sin instalar programas
+## Actualizar tu bingo ya publicado en GitHub y Render
 
-Se necesitan cuentas gratuitas de GitHub y Render, abiertas desde tu navegador. **No uses Netlify Drop para este proyecto:** el juego usa un servidor Node.js con WebSockets para sincronizar jugadores.
+1. Descomprime el ZIP y abre tu repositorio existente `bingo-caotico` en GitHub.
+2. Reemplaza los archivos de la raíz `server.js`, `index.html`, `package.json`, `README.md` y `render.yaml` por los de esta versión. **No subas la carpeta completa ni el ZIP cerrado.**
+3. En GitHub presiona **Commit changes**. Render debería desplegar automáticamente la nueva versión usando el mismo servicio Node configurado con `npm install` y `npm start`.
+4. Abre el enlace existente de Render. Si no se actualiza, en Render elige **Manual Deploy → Deploy latest commit**.
 
-1. Descarga el ZIP entregado en ChatGPT y descomprímelo (doble clic en Mac).
-2. En https://github.com/new, crea un repositorio llamado `bingo-caotico` (puede ser privado). Puedes seleccionar «Add a README» o no.
-3. Dentro del repositorio, elige «Add file» → «Upload files». Arrastra los **cinco elementos directamente desde dentro de la carpeta `bingo-caotico`**: `public` (carpeta), `server.js`, `package.json`, `render.yaml` y este `README.md`. Confirma «Commit changes». Los archivos deben quedar en la raíz del repositorio (no en una subcarpeta).
-4. En https://dashboard.render.com, crea una cuenta, elige «New» → «Web Service», conecta tu GitHub y selecciona el repositorio `bingo-caotico`.
-5. Configura el servicio: **Language: Node**, **Build command: `npm install`**, **Start command: `npm start`**, **Instance type: Free** (para pruebas). Publica con «Deploy Web Service».
-6. Cuando aparezca una URL del tipo `https://bingo-caotico-xxxx.onrender.com`, ábrela. Desde ahí crea la sala, proyecta el QR, pide a los jugadores que entren, inicia y pulsa «Sacar siguiente número» cada vez.
+## Reglas y validación
 
-El archivo `render.yaml` también documenta automáticamente la configuración para un eventual despliegue tipo Blueprint.
+- Todos tienen un cartón diferente y la casilla central es gratis.
+- Cada jugador puede poner/quitar una ficha en cualquier número mientras la partida esté en curso, incluso en un número que aún no fue sorteado.
+- **Solo son válidos los números que fueron sorteados y que el participante marcó**. El servidor verifica esto; marcar antes un número no lo vuelve válido hasta que salga.
+- El animador puede pulsar **Comprobar línea** o **Comprobar cartón** en cualquier jugador. Se muestra si corresponde el premio y los números que faltan por estar sorteados/marcados. Las líneas válidas son horizontales, verticales y diagonales.
+- El cartón y su apariencia se pueden modificar únicamente **antes** de comenzar. Después quedan bloqueados.
+- La primera persona que complete el cartón provoca el final de la partida. El animador puede reiniciar con **Nueva partida**.
 
-## Antes de jugar con 40 personas
+## Importante para el día del evento
 
-- Prueba con 2-3 celulares y el computador del animador.
-- Abre el enlace unos minutos antes de la actividad. En el plan gratuito Render apaga servicios inactivos después de 15 minutos y pueden tardar en reactivarse.
-- Esta primera versión guarda salas y cartones **en memoria**: si el servicio se reinicia, se pierde la partida y hay que crear otra sala. Para un evento con premios importantes se recomienda almacenamiento persistente y alojamiento siempre activo.
-- Se permite un máximo de 40 participantes. Cada participante debería usar su propio celular y navegador.
-
-## Funcionamiento
-
-- Un cartón por jugador, 75 números y centro libre.
-- Se anuncian líneas de 5 casillas horizontales, verticales o diagonales. El primer bingo completo finaliza la partida.
-- Los participantes solo pueden marcar números que ya salieron; pueden desmarcarlos.
-- La sesión puede recuperarse en el mismo navegador mientras el servidor siga activo.
-
-## Opcional: ejecutar localmente
-
-Con Node.js >=20: `npm install` y `npm start`.
+El servidor guarda las salas en memoria. En el plan gratuito de Render, si el servidor se reinicia o entra en reposo, la partida puede perderse. Conviene usar una instancia estable para sesiones importantes y hacer una prueba previa con varios celulares. Los jugadores pueden volver a conectarse con el mismo navegador si la sala continúa activa. No uses el mismo navegador para dos jugadores diferentes: la sesión local del navegador es única.
